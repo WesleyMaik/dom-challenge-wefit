@@ -1,5 +1,9 @@
 const menu = document.querySelector(".btn-group-vertical");
 const header = document.querySelector(".jumbotron");
+const cardsRow = document
+	.querySelectorAll(".row")
+	.values()
+	.find((row) => Boolean(row.querySelector(".card")));
 
 function setMenuToHorizontal(menu) {
 	if (!menu) return;
@@ -33,5 +37,24 @@ function changeHeaderAlignment(header) {
 	button.classList.replace("btn-primary", "btn-success");
 }
 
+function changeCardOrder(cardsRow) {
+	if (!cardsRow) return;
+	const title = cardsRow.querySelector(".col-lg-12");
+	title.style.order = 0;
+
+	const cards = cardsRow.querySelectorAll(".col-lg-3");
+	const cardOrder = [2, 4, 3, 1];
+
+	cards.forEach((card, index) => {
+		card.style.order = cardOrder[index];
+
+		if (cardOrder[index] == 2) {
+			const button = card.querySelector(".btn");
+			button.classList.replace("btn-primary", "btn-success");
+		}
+	});
+}
+
 setMenuToHorizontal(menu);
 changeHeaderAlignment(header);
+changeCardOrder(cardsRow);
