@@ -5,6 +5,8 @@ const cardsRow = document
 	.values()
 	.find((row) => Boolean(row.querySelector(".card")));
 
+const list = document.querySelector(".list-group");
+
 function setMenuToHorizontal(menu) {
 	if (!menu) return;
 
@@ -55,6 +57,30 @@ function changeCardOrder(cardsRow) {
 	});
 }
 
+function addItemsToList(list) {
+	const items = list.querySelectorAll(".list-group-item");
+
+	items.forEach((item) => {
+		item.classList.remove("active");
+	});
+
+	const itemsToAdd = [
+		{ name: "Quarto item", active: true },
+		{ name: "Quinto item", active: false },
+	];
+
+	itemsToAdd.forEach((item) => {
+		const listItem = document.createElement("li");
+		listItem.textContent = item.name;
+		listItem.classList.add("list-group-item");
+
+		if (item.active) listItem.classList.add("active");
+
+		list.append(listItem);
+	});
+}
+
 setMenuToHorizontal(menu);
 changeHeaderAlignment(header);
 changeCardOrder(cardsRow);
+addItemsToList(list);
